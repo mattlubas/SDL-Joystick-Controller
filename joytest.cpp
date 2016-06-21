@@ -27,10 +27,6 @@ int main(int argc, char *argv[])
 
   SDL_JoystickOpen(0);
 
-
-
-  int value_0, value_1, value_2, value_3 = 0;  
-
   //Main Loop
   while(1) {  
     
@@ -38,8 +34,6 @@ int main(int argc, char *argv[])
 
     SDL_Event event;
     
-    SDL_JoyAxisEvent * jaxis;
-
 
     // Found information based on: https://wiki.libsdl.org/SDL_Event
     switch (event.type)

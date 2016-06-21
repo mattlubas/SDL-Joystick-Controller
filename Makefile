@@ -6,7 +6,7 @@ test: joytest
 	./joytest
 
 joytest: joytest.cpp
-	g++ -o joytest $(SDLINC) joytest.cpp -lSDL2
+	g++ -Wall -o joytest $(SDLINC) joytest.cpp -lSDL2
 
 clean:
 	rm -rf joytest *.o
