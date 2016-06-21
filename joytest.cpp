@@ -3,38 +3,27 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-
 static void error(const char * msg)
 {
     fprintf(stderr, "%s\n", msg);
     exit(1); // nonzero exit code = error
 }
 
-
 int main(int argc, char *argv[])
 { 
-
   //Quits if Joystick is not attached
   if (SDL_Init(SDL_INIT_JOYSTICK))
     error("Failed to initialize SDL");
 
-  
-  //Initializes Joystick in SDL
-  SDL_Init(SDL_INIT_JOYSTICK);
+  //Initializes Joystick in SDL SDL_Init(SDL_INIT_JOYSTICK);
 
-  SDL_Joystick * Joy;
-
-  SDL_JoystickOpen(0);
+  SDL_Joystick * Joy = SDL_JoystickOpen(0);
 
   //Main Loop
   while(1) {  
     
-    
-
     SDL_Event event;
     
-
     // Found information based on: https://wiki.libsdl.org/SDL_Event
     switch (event.type)
 	{
@@ -70,8 +59,10 @@ int main(int argc, char *argv[])
         printf("%d\n", event.type);
     }
   } 
+
   SDL_JoystickClose(Joy);
-  void SDL_Quit(void);
+
+  SDL_Quit();
  
   return 0;
 }
