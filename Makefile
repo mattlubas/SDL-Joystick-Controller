@@ -9,7 +9,7 @@ joytest: joytest.cpp
 	g++ -o joytest $(SDLINC) joytest.cpp -lSDL2
 
 clean:
-	rm -rf $(PLUGIN_TARGET) joytest *.o
+	rm -rf joytest *.o
 
 edit:
-	vim $(PLUGIN).cpp
+	vim joytest.cpp
