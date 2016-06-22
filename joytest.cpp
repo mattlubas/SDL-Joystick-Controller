@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     switch (event.type)
 	{
     	case SDL_JOYAXISMOTION:
-        
+            {        
             int yaw      = SDL_JoystickGetAxis (Joy,0);
             int throttle = SDL_JoystickGetAxis (Joy,1);
             int roll     = SDL_JoystickGetAxis (Joy,2);
@@ -39,11 +39,19 @@ int main(int argc, char *argv[])
             printf("Throttle: %d\t", throttle);
             printf("Roll: %d\t", roll);
             printf("Pitch: %d\n", pitch);
+            }
+        case SDL_JOYBUTTONDOWN:  
+            {
+            // PS3 Controller part for Aux
+            bool circle   = SDL_JoystickGetButton(Joy, 1);
+            bool triangle = SDL_JoystickGetButton(Joy, 0);
+            bool square   = SDL_JoystickGetButton(Joy, 3);
 
-            /*
-	        printf("Axis:  %d\t",event.jaxis.axis);
-	        printf("Value: %d\n",event.jaxis.value);
-    	    */
+            printf("Cir: %d\t", circle);
+            printf("Tri: %d\t", triangle);
+            printf("Squ: %d\n", square);
+
+            }
         /*
 	    case SDL_JOYBUTTONDOWN:
 
