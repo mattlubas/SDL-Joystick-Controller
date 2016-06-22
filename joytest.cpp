@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 
   //Initializes Joystick in SDL SDL_Init(SDL_INIT_JOYSTICK);
 
+  // Open joystick 
   SDL_Joystick * Joy = SDL_JoystickOpen(0);
 
   //Main Loop
@@ -27,21 +28,34 @@ int main(int argc, char *argv[])
     // Found information based on: https://wiki.libsdl.org/SDL_Event
     switch (event.type)
 	{
-	case SDL_JOYAXISMOTION:
+    	case SDL_JOYAXISMOTION:
+        
+            int yaw      = SDL_JoystickGetAxis (Joy,0);
+            int throttle = SDL_JoystickGetAxis (Joy,1);
+            int roll     = SDL_JoystickGetAxis (Joy,2);
+            int pitch    = SDL_JoystickGetAxis (Joy,3);
 
-	   printf("Axis:  %d\t",event.jaxis.axis);
-	   printf("Value: %d\n",event.jaxis.value);
-    	
-	case SDL_JOYBUTTONDOWN:
+            printf("Yaw: %d\t", yaw);
+            printf("Throttle: %d\t", throttle);
+            printf("Roll: %d\t", roll);
+            printf("Pitch: %d\n", pitch);
 
-	   printf("Button: %hhu\t",event.jbutton.button);
-	   printf("State: %hhu\n",event.jbutton.state);
+            /*
+	        printf("Axis:  %d\t",event.jaxis.axis);
+	        printf("Value: %d\n",event.jaxis.value);
+    	    */
+        /*
+	    case SDL_JOYBUTTONDOWN:
+
+	        printf("Button: %hhu\t",event.jbutton.button);
+	        printf("State: %hhu\n",event.jbutton.state);
 	   
-	case SDL_JOYBUTTONUP:
+	    case SDL_JOYBUTTONUP:
 
-	   printf("Button: %hhu\t",event.jbutton.button);
-	   printf("State: %hhu\n",event.jbutton.state); 
-	}
+	        printf("Button: %hhu\t",event.jbutton.button);
+	        printf("State: %hhu\n",event.jbutton.state); 
+        */
+    }
 
     //Sleep program for 0.1 Seconds
     usleep(100000);
@@ -51,17 +65,15 @@ int main(int argc, char *argv[])
 
     while( SDL_PollEvent(&event ) )
     {
-      
+        
         // Quit on CTRL-C
         if (event.type == 256)
            return 0;
           
-        printf("%d\n", event.type);
     }
   } 
 
   SDL_JoystickClose(Joy);
-
   SDL_Quit();
  
   return 0;
