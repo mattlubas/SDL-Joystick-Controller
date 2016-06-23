@@ -6,16 +6,16 @@
 //
 
 /*
-   PS3 Controller: 4 axes and 12 buttons
-   Axis 0 = Yaw
-   Axis 1 = Throttle
-   Axis 2 = Roll
-   Axis 4 = Pitch
+PS3 Controller: 4 axes and 12 buttons
+Axis 0 = Yaw
+Axis 1 = Throttle
+Axis 2 = Roll
+Axis 4 = Pitch
 
-   Button 0 = Triangle
-   Button 1 = Circle
-   Button 2 = X
-   Button 3 = Square
+Button 0 = Triangle
+Button 1 = Circle
+Button 2 = X
+Button 3 = Square
 */
 
 #include <SDL.h>
@@ -31,123 +31,111 @@ static void error(const char * msg)
 
 int main(int argc, char *argv[])
 { 
-  //Quits if Joystick is not attached
-  if (SDL_Init(SDL_INIT_JOYSTICK))
-    error("Failed to initialize SDL");
+    //Quits if Joystick is not attached
+    if (SDL_Init(SDL_INIT_JOYSTICK))
+        error("Failed to initialize SDL");
 
-  //Initializes Joystick in SDL SDL_Init(SDL_INIT_JOYSTICK);
+    //Initializes Joystick in SDL SDL_Init(SDL_INIT_JOYSTICK);
 
-  // Open joystick 
-  SDL_Joystick * Joy = SDL_JoystickOpen(0);
+    // Open joystick 
+    SDL_Joystick * Joy = SDL_JoystickOpen(0);
 
-  //Initialization and Selection of controller
-  //Shows the index of the joystick so that the joystick can be specialized.
-  //
-  //For Logitech: Logitech Extreme 3D
-  //For PS3: 2In1 USB Joystick
-  //For Taranis:
-  //For Spektrum:
-  //
-  printf("Name: %s\n", SDL_JoystickNameForIndex(0));
+    //Initialization and Selection of controller
+    //Shows the index of the joystick so that the joystick can be specialized.
+    //
+    //For Logitech: Logitech Extreme 3D
+    //For PS3: 2In1 USB Joystick
+    //For Taranis:
+    //For Spektrum:
+    //
   
-  if (strcmp( SDL_JoystickNameForIndex(0) , "Logitech Extreme 3D") == 0)
-    printf("Connected with Logitech Joystick \n");
+    printf("Name: %s\n", SDL_JoystickNameForIndex(0));
+
+
+    if (strcmp( SDL_JoystickNameForIndex(0) , "Logitech Extreme 3D") == 0)
+        printf("Connected with Logitech Joystick \n");
   
-  
-  else if (strcmp(SDL_JoystickNameForIndex(0) , "2In1 USB Joystick") == 0)
-    printf("Connected with PS3 Controller \n"); 
+    else if (strcmp(SDL_JoystickNameForIndex(0) , "2In1 USB Joystick") == 0)
+        printf("Connected with PS3 Controller \n"); 
 
    
-  else
-    printf("Not Connected \n ");
+    else
+        printf("Not Connected to Proper Joystick \n ");
 
-
-  //Delay for 5 seconds
-  usleep(5000000);
+    //Delay for 3 seconds
+    usleep(3000000);
 
   
 
-
-
-  //Main Loop
-  while(1) {  
-    // printf("Number of Axes: %d\n", SDL_JoystickNumAxes(Joy));
+    //Main Loop
+    while(1) 
+    {  
+        //printf("Number of Axes: %d\n", SDL_JoystickNumAxes(Joy));
  
-    SDL_Event event;
+        SDL_Event event;
     
-    // Found information based on: https://wiki.libsdl.org/SDL_Event
-    switch (event.type)
-	{
-/*       
-        case SDL_JOYAXISMOTION:
-            printf("Axis: %d\t",event.jaxis.axis);
-            printf("Value: %d\n",event.jaxis.value);
-            
-
-        case SDL_JOYBUTTONDOWN:
-            printf("Button: %hhu\t", event.jbutton.button);
-            printf("State: %hhu\n", event.jbutton.state);
-*/   
-
+        // Found information based on: https://wiki.libsdl.org/SDL_Event
     
-    	case SDL_JOYAXISMOTION:
+        switch (event.type)
+	    {
+    	    case SDL_JOYAXISMOTION:
             {
-            //Axes are for the PS3 Controller
-            int Axis_0 = SDL_JoystickGetAxis (Joy,0);
-            int Axis_1 = SDL_JoystickGetAxis (Joy,1);
-            int Axis_2 = SDL_JoystickGetAxis (Joy,2);
-            int Axis_3 = SDL_JoystickGetAxis (Joy,3);
+           
+                //Axes are for the PS3 Controller
+                int Axis_0 = SDL_JoystickGetAxis (Joy,0);
+                int Axis_1 = SDL_JoystickGetAxis (Joy,1);
+                int Axis_2 = SDL_JoystickGetAxis (Joy,2);
+                int Axis_3 = SDL_JoystickGetAxis (Joy,3);
             
             
-            int Axis_4 = SDL_JoystickGetAxis (Joy,4);
-            int Axis_5 = SDL_JoystickGetAxis (Joy,5);
+                int Axis_4 = SDL_JoystickGetAxis (Joy,4);
+                int Axis_5 = SDL_JoystickGetAxis (Joy,5);
 
 
-            printf("Axis_0: %d\t", Axis_0);
-            printf("Axis_1: %d\t", Axis_1);
-            printf("Axis_2: %d\t", Axis_2);
-            printf("Axis_3: %d\t", Axis_3); 
+                printf("Axis_0: %d\t", Axis_0);
+                printf("Axis_1: %d\t", Axis_1);
+                printf("Axis_2: %d\t", Axis_2);
+                printf("Axis_3: %d\t", Axis_3); 
             
-            printf("Axis_4: %d\t", Axis_4);
-            printf("Axis_5: %d\n", Axis_5);
-            
+                printf("Axis_4: %d\t", Axis_4);
+                printf("Axis_5: %d\n", Axis_5);
             }
 /*
-        case SDL_JOYBUTTONDOWN:  
+            case SDL_JOYBUTTONDOWN:  
             {
-            // PS3 Controller part for Aux
-            bool circle   = SDL_JoystickGetButton(Joy, 1);
-            bool triangle = SDL_JoystickGetButton(Joy, 0);
-            bool square   = SDL_JoystickGetButton(Joy, 3);
-            bool x        = SDL_JoystickGetButton(Joy, 2);
+                // PS3 Controller part for Aux
+                bool circle   = SDL_JoystickGetButton(Joy, 1);
+                bool triangle = SDL_JoystickGetButton(Joy, 0);
+                bool square   = SDL_JoystickGetButton(Joy, 3);
+                bool x        = SDL_JoystickGetButton(Joy, 2);
 
 
-            printf("Squ: %d\t", square); 
-            printf("Tri: %d\t", triangle);
-            printf("X:   %d\t", x);
-            printf("Cir: %d\n", circle);
+                printf("Squ: %d\t", square); 
+                printf("Tri: %d\t", triangle);
+                printf("X:   %d\t", x);
+                printf("Cir: %d\n", circle);
             }
 */      
-    }
+        }
 
-    //Sleep program for 0.1 Seconds
-    usleep(100000);
+        //Sleep program for 0.1 Seconds
+        usleep(100000);
  
-    //Updates Controller
-    //int SDL_JoystickEventState(SDL_ENABLE);
+        //Updates Controller
+        //int SDL_JoystickEventState(SDL_ENABLE);
 
-    while( SDL_PollEvent(&event ) )
-    {
+        while( SDL_PollEvent(&event ) )
+        {
       
-        // Quit on CTRL-C
-        if (event.type == 256)
-           return 0;
+            // Quit on CTRL-C
+            if (event.type == 256)
+                return 0;
           
-    }
-  } 
+        }
+    } 
 
-  SDL_JoystickClose(Joy);
-  SDL_Quit();
+    SDL_JoystickClose(Joy);
+    SDL_Quit();
  
-  return 0;
+    return 0;
 }
