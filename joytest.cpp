@@ -44,15 +44,20 @@ int main(int argc, char *argv[])
   //Shows the index of the joystick so that the joystick can be specialized.
   //
   //For Logitech: Logitech Extreme 3D
-  //For PS3:
+  //For PS3: 2In1 USB Joystick
   //For Taranis:
   //For Spektrum:
   //
   printf("Name: %s\n", SDL_JoystickNameForIndex(0));
   
   if (strcmp( SDL_JoystickNameForIndex(0) , "Logitech Extreme 3D") == 0)
-    printf("Works! \n ");
+    printf("Connected with Logitech Joystick \n");
   
+  
+  else if (strcmp(SDL_JoystickNameForIndex(0) , "2In1 USB Joystick") == 0)
+    printf("Connected with PS3 Controller \n"); 
+
+   
   else
     printf("Not Connected \n ");
 
